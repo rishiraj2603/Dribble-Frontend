@@ -1,9 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 // make a check on username taken or not
 
 const RightSide = () => {
+  const navigate = useNavigate();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const usernameRef = useRef();
+  const nameRef = useRef();
+
+  async function submitHandler(e) {
+    e.preventDefault();
+    const name = nameRef.current.value;
+    const username = usernameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    console.log("inside funtion");
+
+    try {
+      const res = await axios.post(`http://localhost:4000/signin`, {
+        name,
+        username,
+        email,
+        password,
+      });
+      console.log("after axios");
+
+      const data = res.data;
+      console.log("🚀 ~ submitHandler ~ data:", data);
+      navigate("/profile");
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    navigate("/profile");
+  }
   return (
     <div className="h-screen w-right p-4">
       <div className="flex justify-end">
@@ -17,6 +49,7 @@ const RightSide = () => {
       </div>
       <div className="container text-2xl h-95">
         <form
+          onSubmit={submitHandler}
           id="signUpForm"
           className="flex flex-col gap-12 w-3/5 h-85  mx-auto my-5"
         >
@@ -28,8 +61,9 @@ const RightSide = () => {
               </label>
               <input
                 type="text"
-                id="Name"
-                name="Name"
+                id="name"
+                name="name"
+                ref={nameRef}
                 className="bg-gray-200 h-10 rounded-lg"
                 required
               />
@@ -40,8 +74,9 @@ const RightSide = () => {
               </label>
               <input
                 type="text"
-                id="Username"
-                name="Username"
+                id="username"
+                name="username"
+                ref={usernameRef}
                 className="bg-gray-200 h-10 rounded-lg"
                 required
               />
@@ -55,6 +90,7 @@ const RightSide = () => {
               type="email"
               id="email"
               name="email"
+              ref={emailRef}
               className="bg-gray-200 h-10 rounded-lg"
               required
             />
@@ -67,6 +103,7 @@ const RightSide = () => {
               type="password"
               id="password"
               name="password"
+              ref={passwordRef}
               className="bg-gray-200 h-10 rounded-lg"
               required
             />
@@ -96,7 +133,7 @@ const RightSide = () => {
             type="submit"
             className="float-left bg-pink-500 text-white rounded-lg h-14 w-64"
           >
-            <Link to="/profile"> Create Account</Link>
+            Create Account
           </button>
           <div id="message" className=" text-base">
             {" "}

@@ -1,0 +1,89 @@
+
+
+main {
+    height: 100%;
+    width: 100%;
+}
+
+.card {
+  width: 16rem;
+  height: 24rem;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+ 
+  img {
+    position: absolute;
+    width: 98%;
+    height: 48%;
+    opacity: 0.9;
+    transition: top .2s ease-in-out;
+  }
+
+  h2 {
+    position: absolute;
+    inset: auto auto 30px 30px;
+    margin: 0;
+    padding: 0.5rem;
+    font-weight: 800;
+    font-size: larger;
+    transition: inset .3s .3s ease-in-out;
+  }
+  
+  p, a {
+    position: absolute;
+    opacity: 0;
+    max-width: 80%;
+    transition: opacity .3s ease-in-out;
+  }
+  
+  p{
+    inset: auto auto 80px 30px;
+  }
+  
+  a {
+    inset: auto auto 40px 30px;
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  &:hover h2 {
+    inset: auto auto 220px 30px;
+    transition: inset .3s ease-in-out;
+  }
+  
+  &:hover p, &:hover a {
+    opacity: 1;
+    transition: opacity .5s .1s ease-in-out;
+  }
+  
+  &:hover img {
+    transition: top .2s ease-in-out;
+    top: -5rem;
+  }
+
+}
+.round{
+  position: absolute;
+  left:45%;
+  bottom: .3rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 2px solid #ddd;
+  appearance:none;
+  cursor: pointer;
+}
+.round:checked {
+  background-color: rgb(252, 14, 157);
+}
+main:has(.round:checked){
+  border:3px solid rgb(252, 14, 157);
+  border-radius:10px ;
+}
+
+.material_symbols_outlined {
+  vertical-align: middle;
+}
