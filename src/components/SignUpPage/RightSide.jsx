@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveUserName } from "../Store/store";
 
 // make a check on username taken or not
 
 const RightSide = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -17,8 +20,6 @@ const RightSide = () => {
     const username = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log("inside funtion");
-
     try {
       const res = await axios.post(`http://localhost:4000/signin`, {
         name,
@@ -26,7 +27,6 @@ const RightSide = () => {
         email,
         password,
       });
-      console.log("after axios");
 
       const data = res.data;
       console.log("🚀 ~ submitHandler ~ data:", data);
@@ -34,6 +34,7 @@ const RightSide = () => {
     } catch (error) {
       console.log(error.response.data);
     }
+    dispatch(saveUserName({ username }));
     navigate("/profile");
   }
   return (

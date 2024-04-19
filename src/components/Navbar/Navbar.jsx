@@ -4,8 +4,8 @@ const Navbar = () => {
   return (
     <div className=" w-screen flex flex-row">
       <div className="w-75  flex flex-row gap-11">
-        <a href="#" className="w-40 block">
-          <img src="/dribble.png" alt="dribble logo" />
+        <a href="/" className="w-40 block">
+          <img src="/blackDribble.png" alt="dribble logo" />
         </a>
         <ul className="w-fit flex flex-row gap-20 justify-center items-center">
           <li>
